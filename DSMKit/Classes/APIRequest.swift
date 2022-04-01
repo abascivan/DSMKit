@@ -79,4 +79,39 @@ public enum API: Namespace {
             
     }
     
+    public enum FileStation: MethodContainer {
+        
+        public static let errors = [
+            400: "No such account or incorrect password",
+            401: "Account disabled",
+            402: "Permission denied",
+            403: "2-step verification code required",
+            404: "Failed to authenticate 2-step verification code"
+        ]
+        
+        public enum FileType: String {
+            case dir
+            case file
+            case all
+        }
+        
+        public static func search(folderPath: String, pattern: String, filetype: FileType = .all, sid: String) -> BasicRequestInfo<APIFileStationSearchData> {
+            return BasicRequestInfo<APIFileStationSearchData>(api: "SYNO.FileStation.Search", versions: 1...2) { encoder in
+                encoder["folder_path"] = folderPath
+                encoder["method"] = "start"
+                encoder["pattern"] = pattern
+                encoder["filetype"] = filetype.rawValue
+                encoder["_sid"] = sid
+            }
+        }
+        
+        public static func list(taskid: String, sid: String) -> BasicRequestInfo<APIFileStationSearchListData> {
+            return BasicRequestInfo<APIFileStationSearchListData>(api: "SYNO.FileStation.Search", versions: 1...2) { encoder in
+                encoder["taskid"] = taskid
+                encoder["method"] = "list"
+                encoder["_sid"] = sid
+            }
+        }
+    }
+    
 }

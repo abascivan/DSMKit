@@ -131,5 +131,23 @@ public struct APILoginData: Codable, ErrorInfo {
     }
 }
 
+public struct APIFileStationSearchData: Codable, ErrorInfo {
+    public typealias ErrorType = AuthError
+    
+    public let taskid: String
+}
+
+public struct APIFileStationSearchListData: Codable, ErrorInfo {
+    public typealias ErrorType = AuthError
+    
+    public let files: [FileData]
+}
+
+public struct FileData: Codable {
+    public let isdir: Bool
+    public let name: String
+    public let path: String
+}
+
 // TODO: APILogoutData
 
