@@ -76,7 +76,6 @@ public enum API: Namespace {
                 otpCode.map { encoder.add(parameter: "otp_code", value: $0, availability: 3...) }
             }
         }
-            
     }
     
     public enum FileStation: MethodContainer {

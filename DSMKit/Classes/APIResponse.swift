@@ -141,6 +141,7 @@ public struct APIFileStationSearchListData: Codable, ErrorInfo {
     public typealias ErrorType = AuthError
     
     public let files: [FileData]
+    public let finished: Bool
 }
 
 public struct FileData: Codable {
